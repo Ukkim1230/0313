@@ -33,18 +33,16 @@
 		</where>
 	</select>
 	<select id="selectUser" resultType="com.web.dto.UserDTO">
-		select
-		UI_NUM,UI_NAME,UI_AGE,UI_ID,UI_PWD,UI_PHONE,UI_ADDRESS,UI_TRANS
-		from
-		USER_INFO
+		select UI_NUM,UI_NAME,UI_AGE,UI_ID,UI_PWD,UI_PHONE,UI_ADDRESS,UI_TRANS
+		from USER_INFO
 		WHERE UI_NUM=#{uiNum}
 	</select>
-	<select id="selectUserByUiId" resultType="com.web.dto.UserDTO">
-		select
-		UI_NUM,UI_NAME,UI_AGE,UI_ID,UI_PWD,UI_PHONE,UI_ADDRESS,UI_TRANS
-		from USER_INFO
-		WHERE UI_ID=#{uiId}
-	</select>
+	<select id="selectUserByUiId" parameterType="map" resultType="com.web.dto.UserDTO">
+    SELECT UI_NUM, UI_NAME, UI_AGE, UI_ID, UI_PWD, UI_PHONE, UI_ADDRESS, UI_TRANS
+    FROM USER_INFO
+    WHERE UI_ID = #{uiId}
+</select>
+
 	<insert id="insertUser">
 		insert into USER_INFO(UI_NAME,UI_AGE,UI_ID,UI_PWD,
 		UI_PHONE,UI_ADDRESS ,UI_TRANS)
@@ -62,7 +60,7 @@
 		,UI_TRANS =#{uiTrans}
 		where UI_NUM=#{uiNum}
 	</update>
-	<delete id="deleteBoard">
-		DELETE FROM BOARD_INFO WHERE BI_NUM=#{biNum}
+	<delete id="deleteUser">
+		DELETE FROM USER_INFO WHERE UI_NUM=#{uiNum}
 	</delete>
 </mapper>

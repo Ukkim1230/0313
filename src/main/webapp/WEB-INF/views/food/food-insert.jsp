@@ -6,28 +6,23 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>게시판 등록</title>
+<title>Insert title here</title>
 </head>
 <body>
-<h3>게시물 등록</h3>
-<form action="/board/insert" method="POST">
+<form action="/food/insert" method="POST">
 <input type="hidden" name="uiNum" value="${user.uiNum}">
- 	<table border="1">
-	<tr>
-		<th>제목</th>
-		<td><input type="text" name="biTitle"></td>
-	</tr>
-	<tr>
-		<th>작성자</th>
-		<td>${user.uiName}</td>
-	</tr>
-	<tr>
-		<th>내용</th>
-		<td><textarea name="biContent"></textarea></td>
-	</tr>
+	<table border="1">
+		<tr>
+			<th>음식명</th>
+			<td><input type="text" name="fiName"></td>
+		</tr>
+		<tr>
+			<th>가격</th>
+			<td><input type="text" name="fiPrice"></td>
+		</tr>
 		<tr>
 			<th colspan="2">
-				<button>등록</button>
+			<button>등록</button> <button type="button" onclick="location.href='/food/food-list'">돌아가기</button>
 			</th>
 		</tr>
 	</table>

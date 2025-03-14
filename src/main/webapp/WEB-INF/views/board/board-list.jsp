@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+   <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,15 +22,17 @@
 		<tr>
 			<th>번호</th>
 			<th>제목</th>
-			<th>내용</th>
-			<th>유저번호</th>
+			<th>작성자</th>
+			<th>게시일</th>
 		</tr>
 		<c:forEach items="${boards}" var="board">
 			<tr>
 				<td>${board.biNum}</td>
 				<td><a href="/board/board-view?biNum=${board.biNum}">${board.biTitle}</a></td>
-				<td>${board.biContent}</td>
-				<td>${board.uiNum}</td>
+				<td>${board.uiName}</td>
+				<fmt:parseDate value="${board.credat}" var="credat" pattern="yyyyMMdd"/>
+				<td><fmt:formatDate value="${credat}" pattern="yyyy-MM-dd"/></td>
+				<!--<td><fmt:formatDate value="${credat}" pattern="yyyy년-MM월-dd일"/></td>-->
 			</tr>
 		</c:forEach>
 	</table>

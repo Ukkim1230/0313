@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.beanutils.BeanUtils;
 
+import com.web.common.CommonCMD;
 import com.web.dto.BoardDTO;
 import com.web.service.BoardService;
 
@@ -24,9 +25,7 @@ public class BoardServlet extends HttpServlet {
 	private BoardService boardService = new BoardService();
        
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String uri = request.getRequestURI();
-		int idx = uri.lastIndexOf("/")+1;
-		String cmd = uri.substring(idx);
+		String cmd = CommonCMD.getCmd(request);
 		if("board-list".equals(cmd)) {
 			String search = request.getParameter("search");
 			String searchStr = request.getParameter("searchStr");
@@ -35,7 +34,6 @@ public class BoardServlet extends HttpServlet {
 			param.put("searchStr", searchStr);
 			List<BoardDTO> boards = boardService.selectBoards(param);
 			request.setAttribute("boards", boards);
-			
 		}else if ("board-view".equals(cmd) || "board-update".equals(cmd)){
 			String biNumStr = request.getParameter("biNum");
 			int biNum = Integer.parseInt(biNumStr);
@@ -43,15 +41,12 @@ public class BoardServlet extends HttpServlet {
 			request.setAttribute("board", board);
 			
 		}
-		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views" + uri + ".jsp");
-		rd.forward(request, response);
+		CommonCMD.viewsforward(request, response);
 	}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String cmd = CommonCMD.getCmd(request);
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html;charset=UTF-8");
-		String uri = request.getRequestURI();
-		int idx = uri.lastIndexOf("/")+1;
-		String cmd = uri.substring(idx);
 		BoardDTO board = new BoardDTO();
 		try {
 			BeanUtils.populate(board, request.getParameterMap());
@@ -60,15 +55,6 @@ public class BoardServlet extends HttpServlet {
 		} catch (InvocationTargetException e) {
 			e.printStackTrace();
 		}
-		if (board.getBiContent() == null || board.getBiContent().trim().isEmpty()) {
-		    request.setAttribute("msg", "내용은 비워둘 수 없습니다.");
-		    request.setAttribute("url", "/board/board-update?biNum=" + board.getBiNum());
-		    RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/common/msg.jsp");
-		    rd.forward(request, response);
-		    return;
-		}
-
-		System.out.println(board);
 		
 		String msg = "";
 		String url = "/board/board-list";
@@ -88,6 +74,7 @@ public class BoardServlet extends HttpServlet {
 			if(boardService.deleteBoard(board.getBiNum()) == 1) {
 				msg = "성공";
 			}
+			url = "/board/board-list";
 		}
 		request.setAttribute("msg", msg);
 		request.setAttribute("url", url);

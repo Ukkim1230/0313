@@ -12,4 +12,7 @@ public class BoardDTO {
 	private String biTitle;
 	private String biContent;
 	private int uiNum;
+	private String credat;
+	private String cretim;
+	private String uiName;
 }

@@ -35,4 +35,9 @@ public class BoardRepository {
 			return session.delete("BoardMapper.deleteBoard", biNum);
 		}
 	}
+//	public static void main(String[] args) {
+//		BoardRepository boardRepo = new BoardRepository();
+//		List<BoardDTO> boards= boardRepo.selectBoards(null);
+//		System.out.println(boards);
+//	}
 }
