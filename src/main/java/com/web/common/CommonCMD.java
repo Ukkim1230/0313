@@ -8,22 +8,23 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 public class CommonCMD {
-	
+
 	public static String getCmd(HttpServletRequest request) {
 		String uri = request.getRequestURI();
-		int idx = uri.lastIndexOf("/")+1;
+		int idx = uri.lastIndexOf("/") + 1;
 		if(idx>0) {
 			return uri.substring(idx);
 		}
 		return null;
 	}
-
-	public static void viewsforward(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	
+	public static void viewsForward(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String uri = "/views" + request.getRequestURI();
 		RequestDispatcher rd = request.getRequestDispatcher(uri);
 		rd.forward(request, response);
 	}
-	public static void msgforward(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+	public static void msgForward(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String uri = "/views/common/msg";
 		RequestDispatcher rd = request.getRequestDispatcher(uri);
 		rd.forward(request, response);

@@ -5,7 +5,7 @@
 <mapper namespace="BoardMapper">
 	<select id="selectBoards" resultType="com.web.dto.BoardDTO">
 		select BI.BI_NUM, BI.UI_NUM, BI.BI_TITLE, BI.BI_CONTENT,
-		BI.CREDAT,
+		BI.CREDAT,BI.BI_PATH,
 		BI.CRETIM, UI.UI_NAME
 		from BOARD_INFO BI
 		inner join USER_INFO UI
@@ -27,7 +27,7 @@
 	</select>
 	<select id="selectBoard" resultType="com.web.dto.BoardDTO">
 		select BI.BI_NUM, BI.UI_NUM,
-		BI.BI_TITLE, BI.BI_CONTENT,
+		BI.BI_TITLE, BI.BI_CONTENT,BI.BI_PATH,
 		BI.CREDAT, BI.CRETIM, UI.UI_NAME
 		from BOARD_INFO BI
 		inner join User_INFO UI
@@ -36,14 +36,15 @@
 	</select>
 	<insert id="insertBoard" parameterType="com.web.dto.BoardDTO">
 		insert into
-		BOARD_INFO(BI_TITLE, BI_CONTENT, UI_NUM)
-		VALUES(#{biTitle},#{biContent},#{uiNum})
+		BOARD_INFO(BI_TITLE, BI_CONTENT, UI_NUM, BI_PATH)
+		VALUES(#{biTitle},#{biContent},#{uiNum}, #{biPath})
 	</insert>
 	<update id="updateBoard" parameterType="com.web.dto.BoardDTO">
 		update BOARD_INFO
 		set
 		BI_TITLE = #{biTitle},
-		BI_CONTENT = #{biContent}
+		BI_CONTENT = #{biContent},
+		BI_PATH = #{biPath}
 		where BI_NUM=#{biNum}
 	</update>
 	<delete id="deleteBoard">

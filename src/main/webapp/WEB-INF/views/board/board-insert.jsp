@@ -10,7 +10,7 @@
 </head>
 <body>
 <h3>게시물 등록</h3>
-<form action="/board/insert" method="POST">
+<form action="/board/insert" method="POST" enctype="multipart/form-data">
 <input type="hidden" name="uiNum" value="${user.uiNum}">
  	<table border="1">
 	<tr>
@@ -24,6 +24,10 @@
 	<tr>
 		<th>내용</th>
 		<td><textarea name="biContent"></textarea></td>
+	</tr>
+	<tr>
+		<th>파일</th>
+		<td><input type="file" name="biFile"></td>	
 	</tr>
 		<tr>
 			<th colspan="2">
