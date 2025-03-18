@@ -24,5 +24,7 @@
     <mapper resource="mybatis/mapper/foodMapper.xml"/>
     <mapper resource="mybatis/mapper/CpuMapper.xml"/>
     <mapper resource="mybatis/mapper/DesktopMapper.xml"/>
+    <mapper resource="mybatis/mapper/StudentMapper.xml"/>
+    <mapper resource="mybatis/mapper/CourseMapper.xml"/>
   </mappers>
 </configuration>
