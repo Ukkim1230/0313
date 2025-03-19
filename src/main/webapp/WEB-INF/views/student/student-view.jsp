@@ -1,14 +1,28 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
+<c:import url="/WEB-INF/views/common/head.jsp"></c:import>
+<style>
+
+.left{
+	width:400px;
+	float:left;
+}
+.right{
+	width:400px;
+	float:right;
+}
+.bottom{
+	margin-top:20px;
+	clear:both;
+	margin:0 auto;
+	text-align:center;
+}
+</style>
 <body>
-<table border="1">
+<div class="container">
+	<div class="left">
+		<table border="1">
 	<tr>
 		<th>번호</th>
 		<td>${student.siNum}</td>
@@ -26,6 +40,8 @@
 		<td>${student.cnt}</td>
 	</tr>
 </table>
+</div>
+<div class="right">
 <table border="1">
 	<tr>
 		<th><input type="checkbox" id="allSiNum"></th>
@@ -41,8 +57,11 @@
 		<td>${course.ciMax}</td>
 	</tr>
 	</c:forEach>
-</table>
-<button type="button" onclick="history.back()">돌아가기</button>
-<button>수강변경</button>
+	</table>
+	</div>
+	<div>
+	<button type="button" onclick="history.back()">돌아가기</button>
+	<button>수강변경</button></div>
+</div>
 </body>
 </html>
