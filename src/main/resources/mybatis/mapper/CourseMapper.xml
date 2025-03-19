@@ -4,11 +4,17 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="CourseMapper">
 	<select id="selectCourses" resultType="com.web.dto.CourseDTO">
-		select ci.*,
-		IFNULL(MSC.CNT,0) as cnt
+		select CI.*, IFNULL(MSC.CNT,0) as cnt
 		from COURSE_INFO CI
 		left outer join (select CI_NUM,COUNT(*)as CNT from MAP_SI_CI
 		group by CI_NUM) MSC
+		on CI.CI_NUM = MSC.CI_NUM
+	</select>
+	<select id="selectCoursesBySiNum" resultType="com.web.dto.CourseDTO">
+		select CI.* , MSC.SI_NUM
+		from COURSE_INFO CI
+		left OUTER join (select CI_NUM,SI_NUM  from MAP_SI_CI
+		where SI_NUM=#{siNum}) MSC
 		on CI.CI_NUM = MSC.CI_NUM
 	</select>
 	<select id="selectCourse" resultType="com.web.dto.CourseDTO">

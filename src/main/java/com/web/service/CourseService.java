@@ -11,6 +11,9 @@ public class CourseService {
 	public List<CourseDTO> selectCourses(CourseDTO course){
 		return courseRepo.selectCourses(course);
 	}
+	public List<CourseDTO> selectCoursesBySiNum(int siNum) {
+		return courseRepo.selectCoursesBySiNum(siNum);
+	}
 	public CourseDTO selectCourse(int ciNum) {
 		return courseRepo.selectCourse(ciNum);
 	}

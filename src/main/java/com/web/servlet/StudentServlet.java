@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.beanutils.BeanUtils;
 
 import com.web.common.CommonCMD;
+import com.web.dto.CourseDTO;
 import com.web.dto.StudentDTO;
 import com.web.service.CourseService;
 import com.web.service.StudentService;
@@ -32,11 +33,12 @@ public class StudentServlet extends HttpServlet {
 	}else if ("student-view".equals(cmd) || "student-update".equals(cmd)) {
 		int siNum = Integer.parseInt(request.getParameter("siNum"));
 		StudentDTO student = studentService.selectStudent(siNum);
+		List<CourseDTO> courses = courseService.selectCoursesBySiNum(siNum);
+		request.setAttribute("courses", courses);
 		request.setAttribute("student", student);
-		}
+	}
 		CommonCMD.viewsForward(request, response);
 	}
-
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		String cmd = CommonCMD.getCmd(request);
