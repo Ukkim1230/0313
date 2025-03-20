@@ -28,7 +28,7 @@
 		SI_ADDRESS = #{siAddress}
 		where SI_NUM=#{siNum}
 	</update>
-	<delete id="deleteGame">
+	<delete id="deleteStudent">
 		DELETE FROM STUDENT_INFO WHERE SI_NUM=#{siNum}
 	</delete>
 </mapper>

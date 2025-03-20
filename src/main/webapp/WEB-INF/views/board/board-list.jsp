@@ -2,6 +2,14 @@
     pageEncoding="UTF-8"%>
    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
    <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+   <%--page request session application --%>
+   <c:if test="${empty sessionScope.user}">
+   <script>
+   		alert('로그인이 필요한 페이지 입니다.');
+   		location.href='/user/login';
+   </script>
+   로그인이 안되었군요
+   </c:if>
 <!DOCTYPE html>
 <html>
 <head>

@@ -1,7 +1,7 @@
 package com.web.servlet;
 
 import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -9,8 +9,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import org.apache.commons.beanutils.BeanUtils;
 
 import com.web.common.CommonCMD;
 import com.web.dto.CourseDTO;
@@ -40,34 +38,13 @@ public class StudentServlet extends HttpServlet {
 		CommonCMD.viewsForward(request, response);
 	}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("UTF-8");
 		String cmd = CommonCMD.getCmd(request);
-		StudentDTO student = new StudentDTO();
-		try {
-			BeanUtils.populate(student, request.getParameterMap());
-		} catch (IllegalAccessException e) {
-			e.printStackTrace();
-		} catch (InvocationTargetException e) {
-			e.printStackTrace();
+		if("delete".equals(cmd)) {
+			int siNum = Integer.parseInt(request.getParameter("siNum"));
+			courseService.updateMapSiCi(siNum, new ArrayList<>());
+			int result = studentService.deleteStudent(siNum);
+			
+			System.out.println("삭제 개수 : " + result);
 		}
-		String url = "/student/student-list";
-		String msg = "실패";
-		if("insert".equals(cmd)) {
-			if(studentService.insertStudent(student)==1) {
-				msg = "성공";
-			}
-		}else if("update".equals(cmd)) {
-			if(studentService.updateStudent(student)==1) {
-				msg = "성공";
-			}
-		}else if ("delete".equals(cmd)) {
-			if(studentService.deleteStudent(student.getSiNum())==1) {
-				msg = "성공";
-			}
-		}
-		request.setAttribute("url", url);
-		request.setAttribute("msg", msg);
-		CommonCMD.msgForward(request, response);
 	}
-
 }
